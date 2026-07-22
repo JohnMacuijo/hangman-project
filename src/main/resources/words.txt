@@ -1,0 +1,50 @@
+PYTHON:A versatile programming language
+KEYBOARD:Used to type on a computer
+MONITOR:A screen that displays computer output
+DATABASE:A collection of organized data
+INTERNET:A global network connecting computers
+COMPILER:A program that translates source code
+SOFTWARE:Programs that run on a computer
+HARDWARE:The physical parts of a computer
+ALGORITHM:A step-by-step problem-solving procedure
+DEBUGGING:The process of finding and fixing errors
+VARIABLE:A named storage location for data
+FUNCTION:A reusable block of code
+BOOLEAN:A data type with true or false values
+LOOP:A structure that repeats instructions
+OBJECT:An instance of a class
+METHOD:A function that belongs to an object
+PACKAGE:A collection of related classes
+STRING:A sequence of characters
+INTEGER:A whole number data type
+ARRAY:A collection of elements stored together
+STUDENT:A person who attends school
+TEACHER:A person who educates students
+LIBRARY:A place where books are kept
+HOMEWORK:Assignments completed outside class
+NOTEBOOK:A book used for writing notes
+CLASSROOM:A room where lessons take place
+EXAMINATION:A formal test of knowledge
+SCHOLARSHIP:Financial aid for education
+UNIVERSITY:An institution of higher learning
+DIPLOMA:A certificate awarded after graduation
+ELEPHANT:The largest land animal
+RAINBOW:A colorful arc in the sky
+MOUNTAIN:A large natural elevation of land
+VOLCANO:A mountain that can erupt lava
+OCEAN:A vast body of salt water
+FOREST:A large area filled with trees
+GALAXY:A massive system of stars
+DIAMOND:A very hard precious gemstone
+TELESCOPE:A device used to observe distant objects
+COMPASS:A tool used for navigation
+APPLE:A common red or green fruit
+BANANA:A long yellow fruit
+PENCIL:A tool used for writing
+BOTTLE:A container for holding liquids
+WINDOW:Lets light and air into a room
+FLOWER:A colorful blooming plant
+GARDEN:A place where plants are grown
+BICYCLE:A two-wheeled vehicle
+AIRPLANE:A vehicle that flies in the sky
+SUNSHINE:Light and warmth from the sun
