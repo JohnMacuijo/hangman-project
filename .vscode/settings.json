@@ -1,4 +1,17 @@
 {
   "java.debug.settings.onBuildFailureProceed": true,
-  "java.configuration.updateBuildConfiguration": "automatic"
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "cSpell.words": [
+    "dropshadow",
+    "hgap",
+    "hgrow",
+    "highscores",
+    "innershadow",
+    "javafx",
+    "quentincillierre",
+    "rgba",
+    "Segoe",
+    "vgap",
+    "vgrow"
+  ]
 }

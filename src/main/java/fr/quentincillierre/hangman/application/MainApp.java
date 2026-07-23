@@ -4,31 +4,53 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fr/quentincillierre/hangman/application/difficulty-view.fxml"));
+
+        FXMLLoader loader = new FXMLLoader(
+                MainApp.class.getResource("/fr/quentincillierre/hangman/application/difficulty-view.fxml"));
+
         Parent root = loader.load();
 
-        // 1. Scene setup
-        Scene scene = new Scene(root, 950, 850);
+        // Create the scene
+        Scene scene = new Scene(root);
 
-        // 2. Set Minimum Dimensions (prevents UI from collapsing too small)
-        primaryStage.setMinWidth(800);
-        primaryStage.setMinHeight(750);
+        // Allow resizing
+        primaryStage.setResizable(true);
 
-        // 3. Enable resizing & standard window controls
-        primaryStage.setResizable(true); 
+        // Minimum window size
+        primaryStage.setMinWidth(900);
+        primaryStage.setMinHeight(700);
 
+        // Start maximized (optional)
+        primaryStage.setMaximized(true);
+
+        // F11 toggles fullscreen
+        scene.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.F11) {
+                primaryStage.setFullScreen(!primaryStage.isFullScreen());
+            }
+        });
+
+        // Window title
         primaryStage.setTitle("Neon Hangman");
+
+        // Show the scene
         primaryStage.setScene(scene);
         primaryStage.show();
+        primaryStage.setMaximized(true);
     }
 
     public static void main(String[] args) {
+
+        System.setProperty("javafx.fullscreenExitHint", "");
+        
         launch(args);
+
     }
 }
