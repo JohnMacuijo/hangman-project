@@ -15,41 +15,48 @@ public class WordRepository {
     private final List<HangmanQuestion> questions = new ArrayList<>();
     private final Random random = new Random();
 
-    public WordRepository() {
-        loadQuestionsFromFile();
+    public WordRepository(String fileName) {
+        loadQuestionsFromFile(fileName);
     }
 
-    private void loadQuestionsFromFile() {
-        InputStream is = getClass().getResourceAsStream("/words.txt");
-        
+    private void loadQuestionsFromFile(String fileName) {
+
+        InputStream is = getClass().getResourceAsStream("/" + fileName);
+
         if (is == null) {
-            System.err.println("Error: words.txt not found in resources folder!");
+            System.err.println("Error: " + fileName + " not found!");
             return;
         }
 
         try (Scanner scanner = new Scanner(new BufferedReader(new InputStreamReader(is)))) {
+
             while (scanner.hasNextLine()) {
+
                 String line = scanner.nextLine().trim();
-                
+
                 if (line.isEmpty() || !line.contains(":")) {
                     continue;
                 }
 
                 String[] parts = line.split(":", 2);
-                String wordText = parts[0].toUpperCase().trim();
-                String hintText = parts[1].trim();
 
-                questions.add(new HangmanQuestion(wordText, hintText));
+                String word = parts[0].toUpperCase().trim();
+                String hint = parts[1].trim();
+
+                questions.add(new HangmanQuestion(word, hint));
             }
+
         } catch (Exception e) {
-            System.err.println("Error reading words.txt: " + e.getMessage());
+            System.err.println("Error reading " + fileName);
         }
     }
 
     public HangmanQuestion getRandomQuestion() {
+
         if (questions.isEmpty()) {
             return new HangmanQuestion("COMPUTER", "A machine that processes data.");
         }
+
         return questions.get(random.nextInt(questions.size()));
     }
 }

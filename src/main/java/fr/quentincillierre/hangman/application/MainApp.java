@@ -10,7 +10,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fr/quentincillierre/hangman/application/game-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fr/quentincillierre/hangman/application/difficulty-view.fxml"));
         Parent root = loader.load();
 
         // 1. Scene setup

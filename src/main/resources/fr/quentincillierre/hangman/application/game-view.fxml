@@ -11,7 +11,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" spacing="15.0" prefHeight="850.0" prefWidth="950.0" 
+<VBox fx:id="rootLayout" 
+      alignment="TOP_CENTER" spacing="15.0" prefHeight="850.0" prefWidth="950.0" 
       style="-fx-background-color: #0b0c10; -fx-font-family: 'Segoe UI', Helvetica, Arial, sans-serif;" 
       xmlns="http://javafx.com/javafx/17" 
       xmlns:fx="http://javafx.com/fxml/1" 
@@ -60,47 +61,47 @@
             </VBox>
             
             <VBox alignment="CENTER" spacing="20.0" HBox.hgrow="ALWAYS">
-               <HBox alignment="CENTER" spacing="20">
+                <HBox alignment="CENTER" spacing="20">
 
-    <!-- Hint -->
-    <HBox alignment="CENTER" spacing="5"
-          style="-fx-background-color: #0d1117;
-                 -fx-padding: 6px 15px;
-                 -fx-background-radius: 15px;
-                 -fx-border-color: #30363d;
-                 -fx-border-radius: 15px;">
+                    <!-- Hint -->
+                    <HBox alignment="CENTER" spacing="5"
+                          style="-fx-background-color: #0d1117;
+                                 -fx-padding: 6px 15px;
+                                 -fx-background-radius: 15px;
+                                 -fx-border-color: #30363d;
+                                 -fx-border-radius: 15px;">
 
-        <Label text="HINT:"
-               textFill="#8b949e"
-               style="-fx-font-weight:bold; -fx-font-size:12px;"/>
+                        <Label text="HINT:"
+                               textFill="#8b949e"
+                               style="-fx-font-weight:bold; -fx-font-size:12px;"/>
 
-        <Label fx:id="hintLabel"
-               text="Ancient structure"
-               textFill="#ff7a00"
-               style="-fx-font-weight:bold; -fx-font-size:12px;"/>
+                        <Label fx:id="hintLabel"
+                               text="Ancient structure"
+                               textFill="#ff7a00"
+                               style="-fx-font-weight:bold; -fx-font-size:12px;"/>
 
-    </HBox>
+                    </HBox>
 
-    <!-- Timer -->
-    <HBox alignment="CENTER" spacing="5"
-          style="-fx-background-color: #0d1117;
-                 -fx-padding: 6px 15px;
-                 -fx-background-radius: 15px;
-                 -fx-border-color: #30363d;
-                 -fx-border-radius: 15px;">
+                    <!-- Timer -->
+                    <HBox alignment="CENTER" spacing="5"
+                          style="-fx-background-color: #0d1117;
+                                 -fx-padding: 6px 15px;
+                                 -fx-background-radius: 15px;
+                                 -fx-border-color: #30363d;
+                                 -fx-border-radius: 15px;">
 
-        <Label text="TIME:"
-               textFill="#8b949e"
-               style="-fx-font-weight:bold; -fx-font-size:12px;"/>
+                        <Label text="TIME:"
+                               textFill="#8b949e"
+                               style="-fx-font-weight:bold; -fx-font-size:12px;"/>
 
-        <Label fx:id="timerLabel"
-               text="60"
-               textFill="#ff4a4a"
-               style="-fx-font-weight:bold; -fx-font-size:12px;"/>
+                        <Label fx:id="timerLabel"
+                               text="60"
+                               textFill="#ff4a4a"
+                               style="-fx-font-weight:bold; -fx-font-size:12px;"/>
 
-    </HBox>
+                    </HBox>
 
-</HBox>
+                </HBox>
 
                 <HBox fx:id="wordDisplayBox" alignment="CENTER" spacing="10.0" prefHeight="60.0">
                 </HBox>
