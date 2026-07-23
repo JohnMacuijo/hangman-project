@@ -1,0 +1,67 @@
+.difficulty-button {
+    -fx-background-color: #0d1117;
+    -fx-text-fill: white;
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #30363d;
+    -fx-border-width: 2;
+
+    -fx-padding: 12 20;
+    -fx-alignment: CENTER_LEFT;
+
+    -fx-cursor: hand;
+}
+
+.difficulty-button:hover {
+    -fx-background-color: #1f2937;
+    -fx-border-color: #ff7a00;
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+
+.difficulty-button:pressed {
+    -fx-background-color: #ff7a00;
+    -fx-text-fill: black;
+}
+
+.selected-difficulty {
+    -fx-background-color: #ff7a00;
+    -fx-border-color: #ffb366;
+    -fx-text-fill: black;
+}
+
+.start-button {
+    -fx-background-color: #ff7a00;
+    -fx-text-fill: #0b0c10;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+
+    -fx-background-radius: 22;
+    -fx-cursor: hand;
+}
+
+
+.start-button:hover {
+    -fx-background-color: #ff9d3d;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+
+    -fx-effect:
+        dropshadow(
+            three-pass-box,
+            rgba(255,122,0,0.6),
+            12,
+            0,
+            0,
+            0
+        );
+}
+
+
+.start-button:pressed {
+    -fx-background-color: #e06b00;
+}
+

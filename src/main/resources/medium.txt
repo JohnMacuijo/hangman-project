@@ -1,0 +1,134 @@
+UMBRELLA:Used during rain
+MOUNTAIN:A very high landform
+NOTEBOOK:Used for writing
+TELESCOPE:Used to observe stars
+AIRPORT:Where airplanes depart
+BICYCLE:A two-wheeled vehicle
+ELEPHANT:The largest land animal
+HOSPITAL:Where patients receive treatment
+VOLCANO:A mountain that erupts
+BACKPACK:Used to carry belongings
+MICROSCOPE:Used to view tiny objects
+CALCULATOR:Used for solving math problems
+REFRIGERATOR:Keeps food cold
+TELEVISION:Used for watching shows
+HEADPHONES:Used for listening to audio
+CAMERA:Used for taking pictures
+FLASHLIGHT:Provides light in darkness
+BATTERY:Stores electrical energy
+COMPASS:Shows direction
+GLOBE:A model of Earth
+MAP:Shows places and locations
+LIBRARY:A place full of books
+MUSEUM:A place with historical objects
+FACTORY:A place where goods are made
+OFFICE:A place where people work
+MARKET:A place to buy and sell goods
+SUPERMARKET:A large grocery store
+RESTAURANT:A place to eat meals
+HOTEL:A place for travelers to stay
+STADIUM:A place for sports events
+PLAYGROUND:A place for children to play
+THEATER:A place to watch performances
+CINEMA:A place to watch movies
+GARAGE:A place to keep vehicles
+WORKSHOP:A place for making or repairing things
+WAREHOUSE:A place for storing goods
+LIGHTHOUSE:Guides ships at sea
+HARBOR:A safe place for boats
+SUBWAY:An underground train system
+HELICOPTER:An aircraft with rotating blades
+SATELLITE:Orbits a planet
+ROCKET:A vehicle for space travel
+ASTRONAUT:A person who travels into space
+PLANET:A large object orbiting a star
+GALAXY:A system of billions of stars
+UNIVERSE:All of space and matter
+COMET:An icy object in space
+METEOR:A rock burning in the atmosphere
+RAINBOW:A colorful arc in the sky
+THUNDER:The sound during a storm
+LIGHTNING:A bright flash during a storm
+HURRICANE:A powerful tropical storm
+TORNADO:A violently rotating column of air
+EARTHQUAKE:A shaking of the ground
+TSUNAMI:A huge ocean wave
+WATERFALL:Water flowing over a cliff
+CANYON:A deep valley with steep sides
+VALLEY:Low land between hills
+CLIFF:A steep rock face
+CAVE:A natural underground chamber
+GLACIER:A large mass of moving ice
+SWAMP:A wet area with trees
+JUNGLE:A dense tropical forest
+PENGUIN:A flightless bird
+KANGAROO:An Australian jumping animal
+DOLPHIN:A smart sea mammal
+WHALE:The largest marine mammal
+SHARK:A large ocean fish
+OCTOPUS:A sea animal with eight arms
+CROCODILE:A large reptile
+ALLIGATOR:A large freshwater reptile
+PEACOCK:A colorful bird
+OWL:A bird active at night
+FALCON:A fast hunting bird
+SWAN:A graceful white bird
+FLAMINGO:A pink water bird
+CAMEL:A desert animal
+ZEBRA:An animal with black and white stripes
+GIRAFFE:The tallest land animal
+HIPPOPOTAMUS:A large river animal
+RHINOCEROS:A large animal with a horn
+CHEETAH:The fastest land animal
+LEOPARD:A spotted wild cat
+PANTHER:A large black wild cat
+SQUIRREL:A tree-climbing rodent
+HAMSTER:A small pet rodent
+HEDGEHOG:A small spiny mammal
+KOALA:An Australian tree-dwelling animal
+PANDA:A black and white bear
+BUFFALO:A large grazing animal
+DONKEY:A hardworking farm animal
+LLAMA:A South American pack animal
+ALPACA:A wool-producing animal
+PARACHUTE:Slows a person's fall
+LADDER:Used for climbing
+HAMMER:Used for driving nails
+SCREWDRIVER:Used for turning screws
+WRENCH:Used for tightening bolts
+DRILL:Used for making holes
+PAINTBRUSH:Used for painting
+SCISSORS:Used for cutting paper
+RULER:Used for measuring length
+ERASER:Removes pencil marks
+MARKER:Used for writing with ink
+CRAYON:A colored wax stick
+CHALK:Used for writing on boards
+BLACKBOARD:A board for classroom writing
+WHITEBOARD:A smooth board for markers
+PROJECTOR:Displays images on a screen
+MICROPHONE:Used to amplify sound
+SPEAKER:A device that produces sound
+RADIO:Receives audio broadcasts
+INTERNET:A global computer network
+WEBSITE:A collection of web pages
+EMAIL:Electronic mail
+PASSWORD:A secret security code
+SOFTWARE:Programs for computers
+HARDWARE:The physical parts of a computer
+ROBOT:A programmable machine
+ENGINE:A machine that provides power
+MOTOR:Converts energy into movement
+GENERATOR:Produces electricity
+SOLARPANEL:Converts sunlight into electricity
+WINDMILL:Uses wind to generate power
+BAT:A flying mammal
+EAGLET:A young eagle
+SAPLING:A young tree
+ORCHARD:A place where fruit trees grow
+GREENHOUSE:A building for growing plants
+FERTILIZER:Helps plants grow
+HARVEST:The gathering of crops
+IRRIGATION:Supplying water to crops
+TRACTOR:A farm vehicle
+PLANTATION:A large farm growing crops

@@ -1,0 +1,129 @@
+ARCHAEOLOGY:The study of ancient civilizations
+CONSTELLATION:A group of stars
+MICROSCOPE:Used to view tiny objects
+METAMORPHOSIS:A complete change in form
+PHOTOSYNTHESIS:How plants make food
+LABYRINTH:A complicated maze
+CHAMPIONSHIP:A competition for the title
+RESPONSIBILITY:A duty or obligation
+ASTRONOMER:A scientist who studies space
+ENCYCLOPEDIA:A book of detailed information
+BIODIVERSITY:The variety of living organisms
+EVAPORATION:The process of liquid becoming gas
+CONDENSATION:The process of gas becoming liquid
+PRECIPITATION:Rain, snow, or hail falling
+GRAVITATION:The force that attracts objects
+ECOSYSTEM:A community of living organisms
+ATMOSPHERE:The layer of gases around Earth
+CONTINENT:A large landmass
+PENINSULA:Land surrounded by water on three sides
+ARCHIPELAGO:A group of islands
+EQUATOR:An imaginary line around Earth
+LONGITUDE:Lines measuring east and west
+LATITUDE:Lines measuring north and south
+MAGNITUDE:The strength of an earthquake
+SEISMOLOGY:The study of earthquakes
+GEOLOGY:The study of Earth's rocks
+MINERAL:A naturally occurring substance
+SEDIMENT:Material settled at the bottom
+FOSSIL:The preserved remains of ancient life
+EVOLUTION:The gradual change of species
+HEREDITY:The passing of traits
+GENETICS:The study of genes
+ORGANISM:A living thing
+VERTEBRATE:An animal with a backbone
+INVERTEBRATE:An animal without a backbone
+MAMMAL:A warm-blooded animal with hair
+AMPHIBIAN:An animal living on land and water
+REPTILE:A cold-blooded scaled animal
+PREDATOR:An animal that hunts others
+PREY:An animal hunted by predators
+CARNIVORE:An animal that eats meat
+HERBIVORE:An animal that eats plants
+OMNIVORE:An animal that eats plants and meat
+HIBERNATION:A deep winter sleep
+MIGRATION:Seasonal movement of animals
+SYMBIOSIS:A close relationship between species
+PARASITE:An organism living on another organism
+BACTERIUM:A single-celled microorganism
+MICROORGANISM:A tiny living organism
+CHLOROPHYLL:The green pigment in plants
+CELLULOSE:A substance in plant cell walls
+MITOCHONDRIA:The cell's energy producer
+NUCLEUS:The control center of a cell
+CYTOPLASM:The jelly-like cell material
+MEMBRANE:A thin protective covering
+MOLECULE:A group of bonded atoms
+ELEMENT:A pure substance of one atom type
+COMPOUND:A substance made of elements
+ATOM:The smallest unit of an element
+ELECTRON:A negatively charged particle
+PROTON:A positively charged particle
+NEUTRON:A particle with no charge
+RADIATION:Energy traveling as waves or particles
+ELECTRICITY:The flow of electric charge
+MAGNETISM:The force produced by magnets
+CONDUCTOR:A material that carries electricity
+INSULATOR:A material that resists electricity
+ACCELERATION:The rate of change in speed
+VELOCITY:Speed in a given direction
+MOMENTUM:The motion of a moving object
+FRICTION:A force resisting motion
+INERTIA:The tendency to resist changes in motion
+THERMODYNAMICS:The study of heat and energy
+REFRACTION:The bending of light
+REFLECTION:The bouncing of light
+WAVELENGTH:The distance between wave peaks
+FREQUENCY:The number of wave cycles
+AMPLITUDE:The height of a wave
+SPECTRUM:The range of light or colors
+GALAXY:A huge system of stars
+NEBULA:A cloud of gas and dust
+SUPERNOVA:A powerful exploding star
+BLACKHOLE:A region with intense gravity
+ASTEROID:A rocky object in space
+METEORITE:A space rock reaching Earth
+SATELLITE:An object orbiting a planet
+ORBIT:The path around an object
+COSMOLOGY:The study of the universe
+EXPLORATION:The act of discovering new places
+NAVIGATION:The process of finding direction
+CIVILIZATION:An advanced human society
+DEMOCRACY:A government by the people
+CONSTITUTION:The fundamental law of a nation
+LEGISLATION:The process of making laws
+JURISDICTION:Legal authority over an area
+DIPLOMACY:The management of international relations
+ECONOMICS:The study of wealth and resources
+INFLATION:A rise in prices
+CURRENCY:A country's money
+INVESTMENT:Putting money into something valuable
+ENTREPRENEUR:A person who starts a business
+INDUSTRIALIZATION:The growth of industries
+GLOBALIZATION:Worldwide connection of economies
+TECHNOLOGY:The application of scientific knowledge
+AUTOMATION:Using machines to perform tasks
+ALGORITHM:A step-by-step problem-solving method
+CYBERSECURITY:Protection of digital systems
+ARTIFICIALINTELLIGENCE:Computer systems simulating intelligence
+ENCRYPTION:The process of securing information
+INNOVATION:The introduction of new ideas
+PHILOSOPHY:The study of knowledge and existence
+PSYCHOLOGY:The study of the human mind
+SOCIOLOGY:The study of society
+ANTHROPOLOGY:The study of human cultures
+LINGUISTICS:The study of language
+LITERATURE:Written artistic works
+BIOGRAPHY:The story of a person's life
+AUTOBIOGRAPHY:A person's own life story
+MANUSCRIPT:A handwritten or typed document
+INTERPRETATION:The explanation of meaning
+ANALYSIS:A detailed examination
+HYPOTHESIS:A testable scientific idea
+EXPERIMENT:A scientific test
+OBSERVATION:Careful watching and recording
+CONCLUSION:A final decision or result
+EVIDENCE:Facts supporting a claim
+RESEARCH:A careful study to discover facts
+DISCOVERY:The finding of something new
+INVESTIGATION:A detailed inquiry
