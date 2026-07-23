@@ -3,83 +3,95 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.shape.Line?>
 
-<VBox
-    alignment="TOP_CENTER"
-    prefHeight="850"
-    prefWidth="950"
-    spacing="15"
-    stylesheets="@css/style.css"
-    xmlns="http://javafx.com/javafx/21"
-    xmlns:fx="http://javafx.com/fxml/1"
-    fx:controller="fr.quentincillierre.hangman.controller.DifficultyController">
+<BorderPane prefHeight="994.0" prefWidth="997" styleClass="root" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.quentincillierre.hangman.controller.DifficultyController">
 
+    <!-- TOP -->
+    <top>
+        <VBox alignment="CENTER" spacing="4" styleClass="top-bar">
 
-    <padding>
-        <Insets top="30" right="30" bottom="30" left="30"/>
-    </padding>
+            <padding>
+                <Insets bottom="34" top="50" />
+            </padding>
 
+            <StackPane prefHeight="60" prefWidth="120">
+                <Line endX="0" endY="60" startX="0" startY="0" styleClass="gallows-line" translateX="-40" />
+                <Line endX="70" endY="0" startX="0" startY="0" styleClass="gallows-line" translateX="-40" />
+                <Line endX="70" endY="18" startX="70" startY="0" styleClass="gallows-line" translateX="-40" />
+                <Label styleClass="skull-icon" text="☠" translateX="35" translateY="6" />
+            </StackPane>
 
-    <VBox alignment="CENTER" spacing="5">
+            <Label styleClass="title-label" text="HANGMAN" />
 
-        <Label text="HANGMAN"
-               textFill="#ff7a00"/>
-
-        <Label text="GUESS THE WORD BEFORE IT'S TOO LATE"
-               textFill="#8b949e"/>
-
-    </VBox>
-
-
-    <VBox alignment="CENTER"
-          maxWidth="500"
-          prefWidth="500"
-          prefHeight="500"
-          spacing="20"
-          style="-fx-background-color:#161b22;
-                 -fx-background-radius:12;
-                 -fx-border-color:#30363d;
-                 -fx-border-radius:12;">
-
-
-        <Label text="CHOOSE DIFFICULTY"
-               textFill="white"/>
-
-
-        <VBox alignment="CENTER" spacing="15">
-
-            <Button fx:id="easyButton"
-                    text="🟢 EASY&#10;Short words • 90 seconds"
-                    onAction="#selectEasy"
-                    styleClass="difficulty-button"/>
-
-
-            <Button fx:id="mediumButton"
-                    text="🟠 MEDIUM&#10;Everyday words • 60 seconds"
-                    onAction="#selectMedium"
-                    styleClass="difficulty-button"/>
-
-
-            <Button fx:id="hardButton"
-                    text="🔴 HARD&#10;Long words • 45 seconds"
-                    onAction="#selectHard"
-                    styleClass="difficulty-button"/>
+            <Label styleClass="subtitle-label" text="GUESS THE WORD BEFORE IT'S TOO LATE" />
 
         </VBox>
+    </top>
 
+    <!-- CENTER -->
+    <center>
+        <StackPane>
+            <VBox alignment="CENTER" maxWidth="460" spacing="0" styleClass="menu-card">
 
-        <Button fx:id="startButton"
-                text="START GAME"
-                onAction="#startGame"
-                styleClass="start-button"/>
+                <padding>
+                    <Insets bottom="40" left="34" right="34" top="40" />
+                </padding>
 
+                <!-- START GAME -->
+                <Button fx:id="startButton" onAction="#startGame" prefHeight="54" prefWidth="392" styleClass="btn-primary" text="START GAME" />
 
-    </VBox>
+                <Region prefHeight="18" />
 
+                <!-- DIFFICULTY -->
+                <VBox spacing="8">
+                    <Label styleClass="section-label" text="DIFFICULTY" />
+                    <HBox alignment="CENTER_LEFT" prefHeight="50" prefWidth="392" styleClass="difficulty-row">
+                        <padding>
+                            <Insets left="18" right="10" />
+                        </padding>
+                        <Label styleClass="difficulty-row-label" text="Select Difficulty" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <MenuButton fx:id="difficultyMenu" prefHeight="39.0" prefWidth="243.0" styleClass="difficulty-menu" text="EASY">
+                            <items>
+                                <MenuItem onAction="#selectEasy" text="Easy" />
+                                <MenuItem onAction="#selectMedium" text="Medium" />
+                                <MenuItem onAction="#selectHard" text="Hard" />
+                            </items>
+                        </MenuButton>
+                    </HBox>
+                </VBox>
 
-</VBox>
+                <Region prefHeight="26" />
+
+                <!-- SECONDARY ACTIONS -->
+                <VBox spacing="12">
+                    <Button fx:id="challengerButton" onAction="#challengerMode" prefHeight="50" prefWidth="392" styleClass="btn-secondary" text="⚔  CHALLENGER MODE" />
+
+                    <Button fx:id="aboutButton" onAction="#about" prefHeight="50" prefWidth="392" styleClass="btn-secondary" text="ⓘ  ABOUT" />
+
+                    <Button fx:id="exitButton" onAction="#exit" prefHeight="50" prefWidth="392" styleClass="btn-danger" text="✕  EXIT" />
+                </VBox>
+
+            </VBox>
+        </StackPane>
+    </center>
+
+    <!-- BOTTOM -->
+    <bottom>
+        <VBox alignment="CENTER" styleClass="footer-bar">
+            <padding>
+                <Insets bottom="26" top="16" />
+            </padding>
+            <Label styleClass="version-label" text="Version 1.0" />
+        </VBox>
+    </bottom>
+
+</BorderPane>
