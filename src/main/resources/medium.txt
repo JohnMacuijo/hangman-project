@@ -1,0 +1,10 @@
+UMBRELLA:Used during rain
+MOUNTAIN:A very high landform
+NOTEBOOK:Used for writing
+TELESCOPE:Used to observe stars
+AIRPORT:Where airplanes depart
+BICYCLE:A two-wheeled vehicle
+ELEPHANT:The largest land animal
+HOSPITAL:Where patients receive treatment
+VOLCANO:A mountain that erupts
+BACKPACK:Used to carry belongings

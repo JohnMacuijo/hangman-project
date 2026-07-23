@@ -1,0 +1,10 @@
+APPLE:A sweet fruit
+CHAIR:Used for sitting
+HOUSE:A place to live
+RIVER:A natural flowing water
+PHONE:Used for calling
+PIZZA:A popular Italian food
+FLOWER:A colorful plant
+SCHOOL:A place to learn
+WINDOW:Lets light into a room
+BANANA:A yellow fruit
