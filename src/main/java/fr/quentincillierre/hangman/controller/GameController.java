@@ -70,6 +70,9 @@ public class GameController {
     @FXML
     private GridPane keyboardGrid;
 
+    @FXML
+    private Button restartBtn;
+
     // Optional -- add fx:id="mainMenuBtn" (a Button) to the FXML, next to restartBtn,
     // for the "back to main menu" choice shown on game over. Null-checked, so the
     // game still runs without it -- it just won't show that option.
@@ -93,7 +96,6 @@ public class GameController {
     @FXML
     private Button hintButton;
 
-    private boolean isGameOver = false;
     private boolean beatHighScoreThisRun = false;
     private final java.util.Random random = new java.util.Random();
 
@@ -125,13 +127,13 @@ public class GameController {
 
         restartBtn.setFocusTraversable(false);
 
-if (hintButton != null) {
-    hintButton.setFocusTraversable(false);
-}
+        if (hintButton != null) {
+            hintButton.setFocusTraversable(false);
+        }
 
-if (mainMenuBtn != null) {
-    mainMenuBtn.setFocusTraversable(false);
-}
+        if (mainMenuBtn != null) {
+            mainMenuBtn.setFocusTraversable(false);
+        }
 
         if (mainMenuBtn != null) {
             applyButtonAnimations(mainMenuBtn, "transparent", "#c9d1d9", "#1c2530", "#ff7a00");
@@ -157,8 +159,6 @@ if (mainMenuBtn != null) {
     // SCORING SETUP
     // ---------------------------------------------------------------------
 
-    /** Time bonus still scales with difficulty; the score itself is a flat WORD_COMPLETION_POINTS per solved word. */
-
     private void addScore(int amount) {
         score += amount;
         updateScoreUI();
@@ -172,16 +172,16 @@ if (mainMenuBtn != null) {
     }
 
     private void addTime(int seconds) {
-    timeRemaining += seconds;
+        timeRemaining += seconds;
 
-    timerLabel.setText(String.valueOf(timeRemaining));
+        timerLabel.setText(String.valueOf(timeRemaining));
 
-    if (timeRemaining > 10) {
-        setCriticalGlow(timerLabel, false);
+        if (timeRemaining > 10) {
+            setCriticalGlow(timerLabel, false);
+        }
+
+        updateHangmanImageForTimer();
     }
-
-    updateHangmanImageForTimer();
-}
 
     private void updateScoreUI() {
         if (scoreLabel != null) {
@@ -242,7 +242,6 @@ if (mainMenuBtn != null) {
     /** Full reset -- used when the player picks a difficulty or explicitly restarts. */
     private void startNewGame() {
         score = 0;
-        isGameOver = false;
         beatHighScoreThisRun = false;
         updateScoreUI();
         loadHighScoreForDifficulty();
@@ -265,10 +264,9 @@ if (mainMenuBtn != null) {
         model = new HangmanModel(question.text());
         currentHint = question.hint();
 
-        isGameOver = false;
-
-        restartBtn.setText("Skip Word");
-        restartBtn.setDisable(false);
+        // Play Again is only relevant once the game has ended -- hidden while a word is live.
+        restartBtn.setVisible(false);
+        restartBtn.setManaged(false);
 
         if (hintButton != null) {
             hintButton.setDisable(false);
@@ -291,64 +289,58 @@ if (mainMenuBtn != null) {
 
         keyboardGrid.setDisable(false);
 
-        if (minus != null) {
-     minus.setVisible(true);
-        minus.setManaged(true);
-    }
-
         generateKeyboard();
         refreshUI();
-        Platform.runLater(() -> restartBtn.requestFocus());
     }
 
-private void startTimer() {
-    if (countdownTimer != null) {
-        countdownTimer.stop();
-    }
+    private void startTimer() {
+        if (countdownTimer != null) {
+            countdownTimer.stop();
+        }
 
-    switch (difficulty) {
-        case EASY -> timeRemaining = 50;
-        case MEDIUM -> timeRemaining = 30;
-        case HARD -> timeRemaining = 20;
-    }
+        switch (difficulty) {
+            case EASY -> timeRemaining = 50;
+            case MEDIUM -> timeRemaining = 30;
+            case HARD -> timeRemaining = 20;
+        }
 
-    timerLabel.setText(String.valueOf(timeRemaining));
+        timerLabel.setText(String.valueOf(timeRemaining));
 
-    countdownTimer = new Timeline(
-        new KeyFrame(Duration.seconds(1), e -> {
-            if (model.isLose()) {
-    countdownTimer.stop();
-    return;
-}
-
-if (model.isWin()) {
-    return;
-}
-
-            if (timeRemaining > 0) {
-                timeRemaining--;
-                timerLabel.setText(String.valueOf(timeRemaining));
-
-                refreshUI();
-
-                if (timeRemaining <= 10) {
-                    setCriticalGlow(timerLabel, true);
-                    SoundManager.playClickSound(180, 40);
+        countdownTimer = new Timeline(
+            new KeyFrame(Duration.seconds(1), e -> {
+                if (model.isLose()) {
+                    countdownTimer.stop();
+                    return;
                 }
 
-                updateHangmanImageForTimer();
-            }
+                if (model.isWin()) {
+                    return;
+                }
 
-            if (timeRemaining <= 0) {
-                countdownTimer.stop();
-                triggerGameOver(true);
-            }
-        })
-    );
+                if (timeRemaining > 0) {
+                    timeRemaining--;
+                    timerLabel.setText(String.valueOf(timeRemaining));
 
-    countdownTimer.setCycleCount(Timeline.INDEFINITE);
-    countdownTimer.play();
-}
+                    refreshUI();
+
+                    if (timeRemaining <= 10) {
+                        setCriticalGlow(timerLabel, true);
+                        SoundManager.playClickSound(180, 40);
+                    }
+
+                    updateHangmanImageForTimer();
+                }
+
+                if (timeRemaining <= 0) {
+                    countdownTimer.stop();
+                    triggerGameOver(true);
+                }
+            })
+        );
+
+        countdownTimer.setCycleCount(Timeline.INDEFINITE);
+        countdownTimer.play();
+    }
 
     private void handleLetter(String s) {
         if (timeRemaining <= 0 || s == null || s.isBlank() || model.isWin() || model.isLose()) {
@@ -360,11 +352,11 @@ if (model.isWin()) {
         if (!model.getGuessedLetter().contains(letterChar)) {
             String targetWord = model.getWordToGuess().toLowerCase();
 
-          if (targetWord.contains(String.valueOf(letterChar))) {
-    SoundManager.playCorrectSound();
-} else {
-    SoundManager.playClickSound(600, 25);
-}
+            if (targetWord.contains(String.valueOf(letterChar))) {
+                SoundManager.playCorrectSound();
+            } else {
+                SoundManager.playClickSound(600, 25);
+            }
         }
 
         model.tryLetter(s.charAt(0));
@@ -372,43 +364,32 @@ if (model.isWin()) {
     }
 
     /**
-     * Removes seconds from the clock (used by Skip Word and the hint reveal).
+     * Removes seconds from the clock (used by the hint/letter-unlock).
      * If it drains the clock to zero, ends the game as a timeout and returns
      * false so the caller knows not to proceed with its own action.
      */
-private boolean deductTime(int seconds) {
+    private boolean deductTime(int seconds) {
 
-    timeRemaining -= seconds;
+        timeRemaining -= seconds;
 
-    timerLabel.setText(String.valueOf(timeRemaining));
+        timerLabel.setText(String.valueOf(timeRemaining));
 
-    if (timeRemaining <= 0) {
-        if (countdownTimer != null) {
-            countdownTimer.stop();
+        if (timeRemaining <= 0) {
+            if (countdownTimer != null) {
+                countdownTimer.stop();
+            }
+
+            triggerGameOver(true);
+            return false;
         }
 
-        triggerGameOver(true);
-        return false;
-    }
-
-    if (timeRemaining > 10) {
-        setCriticalGlow(timerLabel, false);
-    }
-
-    updateHangmanImageForTimer();
-
-    return true;
-}
-
-    /** Skips the current word for a 5-second time penalty. */
-    private void skipWord() {
-        if (model == null || model.isWin() || model.isLose()) {
-            return;
+        if (timeRemaining > 10) {
+            setCriticalGlow(timerLabel, false);
         }
-        if (!deductTime(5)) {
-            return;
-        }
-        loadNextWord();
+
+        updateHangmanImageForTimer();
+
+        return true;
     }
 
     /** Unlocks one random unguessed letter in the word for a 5-second time penalty. */
@@ -435,14 +416,14 @@ private boolean deductTime(int seconds) {
         }
 
         char letterToReveal = remaining.get(random.nextInt(remaining.size()));
-SoundManager.playCorrectSound();
-model.tryLetter(letterToReveal);
+        SoundManager.playCorrectSound();
+        model.tryLetter(letterToReveal);
 
-if (hintButton != null) {
-    hintButton.setDisable(true);
-}
+        if (hintButton != null) {
+            hintButton.setDisable(true);
+        }
 
-refreshUI();
+        refreshUI();
     }
 
     /** Loads /pictures/{frame}-hangman.png into the hangman image view, if present. */
@@ -479,9 +460,9 @@ refreshUI();
         }
 
         if (timeRemaining == 10) {
-        loadHangmanImage(0);
-        return;
-}
+            loadHangmanImage(0);
+            return;
+        }
 
         int frame = 10 - timeRemaining;
         loadHangmanImage(frame);
@@ -498,38 +479,20 @@ refreshUI();
         double progress;
 
         if (timeRemaining <= 10) {
-
-    progress = (10 - timeRemaining) / 10.0;
-
-} else {
-
-    // normal danger from wrong guesses
-    progress = (double) currentWrongs / maxAttempts;
-
-}
+            progress = (10 - timeRemaining) / 10.0;
+        } else {
+            // normal danger from wrong guesses
+            progress = (double) currentWrongs / maxAttempts;
+        }
         dangerProgressBar.setProgress(progress);
 
         if (timeRemaining <= 10) {
-
-    dangerProgressBar.setStyle(
-        "-fx-accent: #f85149;"
-    );
-
-}
-else if (attemptsLeft <= 2 && attemptsLeft > 0) {
-
-    dangerProgressBar.setStyle(
-        "-fx-accent: #f85149;"
-    );
-
-}
-else {
-
-    dangerProgressBar.setStyle(
-        "-fx-accent: #ff7a00;"
-    );
-
-}
+            dangerProgressBar.setStyle("-fx-accent: #f85149;");
+        } else if (attemptsLeft <= 2 && attemptsLeft > 0) {
+            dangerProgressBar.setStyle("-fx-accent: #f85149;");
+        } else {
+            dangerProgressBar.setStyle("-fx-accent: #ff7a00;");
+        }
 
         hintLabel.setText(currentHint);
         wordLengthLabel.setText(model.getWordToGuess().length() + " letters");
@@ -596,8 +559,6 @@ else {
     private void triggerGameOver(boolean isTimeOut) {
         SoundManager.playFailSound();
 
-        isGameOver = true;
-
         if (hintButton != null) {
             hintButton.setDisable(true);
         }
@@ -622,7 +583,10 @@ else {
 
         statusLabel.setText(reason + scoreLine);
         statusLabel.setStyle("-fx-text-fill: #f85149; -fx-font-weight: bold; -fx-font-size: 15px;");
+
         restartBtn.setText("Play Again");
+        restartBtn.setVisible(true);
+        restartBtn.setManaged(true);
         restartBtn.setDisable(false);
 
         if (mainMenuBtn != null) {
@@ -631,11 +595,6 @@ else {
         }
 
         keyboardGrid.setDisable(true);
-
-        if (minus != null) {
-    minus.setVisible(false);
-    minus.setManaged(false);
-}
     }
 
     private void renderWordBoxes() {
@@ -793,57 +752,44 @@ else {
     }
 
     @FXML
-private void backToMenu() {
+    private void backToMenu() {
 
-    try {
+        try {
 
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getResource(
-                "/fr/quentincillierre/hangman/application/difficulty-view.fxml")
-        );
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource(
+                    "/fr/quentincillierre/hangman/application/difficulty-view.fxml")
+            );
 
-        Parent root = loader.load();
+            Parent root = loader.load();
 
+            Stage stage = (Stage) mainMenuBtn.getScene().getWindow();
 
-        Stage stage = (Stage) mainMenuBtn.getScene().getWindow();
+            Scene scene = new Scene(root);
 
+            stage.setScene(scene);
 
-        Scene scene = new Scene(root);
+            // Restore fullscreen
+            stage.setFullScreenExitHint("");
+            stage.setFullScreen(true);
 
+            stage.show();
 
-        stage.setScene(scene);
-
-
-        // Restore fullscreen
-        stage.setFullScreenExitHint("");
-        stage.setFullScreen(true);
-
-
-        stage.show();
-
-
-    } catch (IOException e) {
-
-        e.printStackTrace();
-
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-}
 
     @FXML
     public void restart() {
         SoundManager.stopFailSound();
+        SoundManager.playNewWordSound();
 
-        if (isGameOver) {
-            SoundManager.playNewWordSound();
-
-            ScaleTransition clickAnim = new ScaleTransition(Duration.millis(100), restartBtn);
-            clickAnim.setToX(1.0);
-            clickAnim.setToY(1.0);
-            clickAnim.setOnFinished(e -> startNewGame());
-            clickAnim.play();
-        } else {
-            skipWord();
-        }
+        ScaleTransition clickAnim = new ScaleTransition(Duration.millis(100), restartBtn);
+        clickAnim.setToX(1.0);
+        clickAnim.setToY(1.0);
+        clickAnim.setOnFinished(e -> startNewGame());
+        clickAnim.play();
     }
 
     public void setDifficulty(Difficulty difficulty) {
@@ -857,11 +803,4 @@ private void backToMenu() {
 
         startNewGame();
     }
-
-    @FXML
-private Label minus;
-
-@FXML
-private Button restartBtn;
-
 }

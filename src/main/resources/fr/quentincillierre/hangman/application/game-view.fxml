@@ -134,15 +134,9 @@
                 </VBox>
             </HBox>
 
+            <!-- Play Again / Back to Menu, hidden until the game actually ends -->
             <HBox alignment="CENTER" spacing="15.0">
-                <VBox alignment="CENTER" spacing="6.0">
-                    <Button fx:id="restartBtn" onAction="#restart" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #ff7a00; -fx-text-fill: #0b0c10; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 20px; -fx-cursor: hand; -fx-effect: dropshadow(three-pass-box, rgba(255,122,0,0.3), 8, 0, 0, 0);" text="Skip Word">
-                        <tooltip>
-                            <Tooltip text="Skipping this word costs 5 seconds!" />
-                        </tooltip>
-                    </Button>
-                    <Label fx:id="minus" style="-fx-font-size: 10px; -fx-font-weight: bold;" text="Skipping costs -5s" textFill="#8b949e" />
-                </VBox>
+                <Button fx:id="restartBtn" onAction="#restart" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #ff7a00; -fx-text-fill: #0b0c10; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 20px; -fx-cursor: hand; -fx-effect: dropshadow(three-pass-box, rgba(255,122,0,0.3), 8, 0, 0, 0);" text="Play Again" visible="false" managed="false" />
 
                 <Button fx:id="mainMenuBtn" managed="false" onAction="#backToMenu" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-text-fill: #c9d1d9; -fx-border-color: #30363d; -fx-border-width: 1.5px; -fx-border-radius: 20px; -fx-background-radius: 20px; -fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;" text="Back to Menu" visible="false" />
             </HBox>
