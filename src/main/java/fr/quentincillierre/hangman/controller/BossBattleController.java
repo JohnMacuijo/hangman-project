@@ -96,7 +96,14 @@ public class BossBattleController {
 
     private int wordsCompleted = 0;
     private int hangmanStage = 0;
+    private int guessesUsed = 0;
     private boolean runOver = false;
+
+    // True only while the current word can still accept guesses. False the instant
+    // it's solved, timed out, or the guess cap is hit -- guards BOTH the on-screen
+    // keyboard buttons AND the raw physical-key listener below, since disabling
+    // keyboardGrid alone does not stop the Scene-level key filter from firing.
+    private boolean wordActive = false;
 
     private final String[][] QWERTY_LAYOUT = {
         {"Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"},
@@ -173,6 +180,8 @@ public class BossBattleController {
         HangmanQuestion question = wordRepository.getRandomQuestion();
 
         model = new HangmanModel(question.text());
+        wordActive = true;
+        guessesUsed = 0;
 
         // Display taunt with the hint highlighted in bright orange (#ff7a00)
         String taunt = NEW_WORD_TAUNTS[random.nextInt(NEW_WORD_TAUNTS.length)];
@@ -204,7 +213,7 @@ public class BossBattleController {
 
         countdownTimer = new Timeline(
             new KeyFrame(Duration.seconds(1), e -> {
-                if (runOver || model.isWin()) {
+                if (runOver || !wordActive) {
                     countdownTimer.stop();
                     return;
                 }
@@ -233,7 +242,11 @@ public class BossBattleController {
     }
 
     private void handleLetter(String s) {
-        if (runOver || timeRemaining <= 0 || s == null || s.isBlank() || model.isWin()) {
+        // wordActive is the single source of truth for "can this word still take input" --
+        // it covers mouse clicks AND the raw key listener, and is false the instant the
+        // word is solved, times out, or hits the guess cap, so no stray keystroke during
+        // the brief pause before the next word loads can double-trigger anything.
+        if (runOver || !wordActive || timeRemaining <= 0 || s == null || s.isBlank() || model.isWin()) {
             return;
         }
 
@@ -249,10 +262,11 @@ public class BossBattleController {
             }
 
             model.tryLetter(s.charAt(0));
+            guessesUsed++;
             refreshUI();
 
-            // Check if user reached 13 guesses without solving the word
-            if (!model.isWin() && model.getGuessedLetter().size() >= MAX_GUESSES_PER_WORD) {
+            // Exactly 13 letters tried without solving the word -> lose this word, move on.
+            if (wordActive && !model.isWin() && guessesUsed >= MAX_GUESSES_PER_WORD) {
                 if (countdownTimer != null) {
                     countdownTimer.stop();
                 }
@@ -263,6 +277,8 @@ public class BossBattleController {
 
     /** Word solved before the clock ran out or guess limit reached. */
     private void handleWordSolved() {
+        wordActive = false;
+
         if (countdownTimer != null) countdownTimer.stop();
         setCriticalGlow(timerLabel, false);
 
@@ -290,6 +306,15 @@ public class BossBattleController {
 
     /** Time ran out OR player exceeded 13 letter attempts. */
     private void handleTimeout() {
+        // Guard against duplicate calls: once a timeout has already fired for this
+        // word, wordActive is false, so a second call (e.g. from a stray keystroke
+        // that slipped in before the flag flipped) is a no-op instead of stacking
+        // another hangman stage and another PauseTransition.
+        if (!wordActive) {
+            return;
+        }
+        wordActive = false;
+
         setCriticalGlow(timerLabel, false);
 
         hangmanStage++;
@@ -318,6 +343,7 @@ public class BossBattleController {
 
     private void triggerVictory() {
         runOver = true;
+        wordActive = false;
         if (countdownTimer != null) countdownTimer.stop();
         if (criticalPulseAnimation != null) criticalPulseAnimation.stop();
         setCriticalGlow(timerLabel, false);
@@ -342,6 +368,7 @@ public class BossBattleController {
 
     private void triggerDefeat() {
         runOver = true;
+        wordActive = false;
         if (countdownTimer != null) countdownTimer.stop();
         if (criticalPulseAnimation != null) criticalPulseAnimation.stop();
         setCriticalGlow(timerLabel, false);
@@ -416,7 +443,7 @@ public class BossBattleController {
     private void refreshUI() {
         renderWordBoxes();
 
-        int remainingGuesses = Math.max(0, MAX_GUESSES_PER_WORD - model.getGuessedLetter().size());
+        int remainingGuesses = Math.max(0, MAX_GUESSES_PER_WORD - guessesUsed);
         wordLengthLabel.setText(model.getWordToGuess().length() + " letters | Guesses left: " + remainingGuesses);
 
         if (model.isWin()) {
@@ -601,7 +628,11 @@ public class BossBattleController {
 
     @FXML
     private void backToMenu() {
+        SoundManager.playClickSound(440, 20);
         SoundManager.stopFailSound();
+
+        runOver = true;
+        wordActive = false;
 
         if (countdownTimer != null) countdownTimer.stop();
         if (criticalPulseAnimation != null) criticalPulseAnimation.stop();

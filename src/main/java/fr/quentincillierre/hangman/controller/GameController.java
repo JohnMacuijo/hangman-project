@@ -326,6 +326,8 @@ public class GameController {
                     if (timeRemaining <= 10) {
                         setCriticalGlow(timerLabel, true);
                         SoundManager.playClickSound(180, 40);
+                    } else {
+                        SoundManager.playClickSound(320, 12);
                     }
 
                     updateHangmanImageForTimer();
@@ -754,6 +756,7 @@ public class GameController {
     @FXML
     private void backToMenu() {
 
+        SoundManager.playClickSound(440, 20);
         SoundManager.stopFailSound();
 
         if (countdownTimer != null) {
@@ -791,6 +794,7 @@ public class GameController {
 
     @FXML
     public void restart() {
+        SoundManager.playClickSound(440, 20);
         SoundManager.stopFailSound();
         SoundManager.playNewWordSound();
 
