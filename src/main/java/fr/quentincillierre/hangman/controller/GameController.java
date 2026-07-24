@@ -33,7 +33,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -73,28 +78,24 @@ public class GameController {
     @FXML
     private Button restartBtn;
 
-    // Optional -- add fx:id="mainMenuBtn" (a Button) to the FXML, next to restartBtn,
-    // for the "back to main menu" choice shown on game over. Null-checked, so the
-    // game still runs without it -- it just won't show that option.
     @FXML
     private Button mainMenuBtn;
 
     @FXML
     private Label timerLabel;
 
-    // Optional -- add fx:id="scoreLabel" / fx:id="highScoreLabel" to the FXML to show these.
-    // Both are null-checked everywhere, so the game runs fine without them.
     @FXML
     private Label scoreLabel;
 
     @FXML
     private Label highScoreLabel;
 
-    // Optional -- add fx:id="hintButton" (a Button, e.g. text="\uD83D\uDCA1") beside the
-    // keyboard. It unlocks one random unguessed letter in the word for a 5-second
-    // time penalty -- it does NOT reveal the hint text. Null-checked.
     @FXML
     private Button hintButton;
+
+    // --- VIDEO PLAYBACK FIELDS ---
+    private MediaView hangmanMediaView;
+    private MediaPlayer victoryVideoPlayer;
 
     private boolean beatHighScoreThisRun = false;
     private final java.util.Random random = new java.util.Random();
@@ -129,19 +130,16 @@ public class GameController {
 
         if (hintButton != null) {
             hintButton.setFocusTraversable(false);
+            applyButtonAnimations(hintButton, "transparent", "#ffd166", "#1c2530", "#ffd166");
         }
 
         if (mainMenuBtn != null) {
             mainMenuBtn.setFocusTraversable(false);
-        }
-
-        if (mainMenuBtn != null) {
             applyButtonAnimations(mainMenuBtn, "transparent", "#c9d1d9", "#1c2530", "#ff7a00");
         }
 
-        if (hintButton != null) {
-            applyButtonAnimations(hintButton, "transparent", "#ffd166", "#1c2530", "#ffd166");
-        }
+        // Initialize MediaView overlay and video player
+        setupVideoContainerInCode();
 
         Platform.runLater(() -> {
             if (keyboardGrid.getScene() != null) {
@@ -153,6 +151,88 @@ public class GameController {
                 });
             }
         });
+    }
+
+    // ---------------------------------------------------------------------
+    // VIDEO INITIALIZATION & CONTROLS
+    // ---------------------------------------------------------------------
+
+    private void setupVideoContainerInCode() {
+        if (hangmanImageView == null) return;
+
+        // 1. Create MediaView overlay
+        hangmanMediaView = new MediaView();
+        hangmanMediaView.setFitWidth(200);
+        hangmanMediaView.setFitHeight(200);
+        hangmanMediaView.setPreserveRatio(false);
+        hangmanMediaView.setVisible(false);
+
+        // 2. Wrap hangmanImageView inside StackPane
+        if (hangmanImageView.getParent() instanceof Pane parentPane) {
+            int index = parentPane.getChildren().indexOf(hangmanImageView);
+
+            StackPane imageHolder = new StackPane();
+            imageHolder.setPrefSize(200, 200);
+
+            parentPane.getChildren().remove(hangmanImageView);
+            imageHolder.getChildren().addAll(hangmanImageView, hangmanMediaView);
+            parentPane.getChildren().add(index, imageHolder);
+        } else {
+            System.err.println("⚠️ Could not wrap hangmanImageView inside parent container.");
+        }
+
+        // 3. Look for dancing-cat.mp4 in resources
+        try {
+            URL videoUrl = getClass().getResource("/dancing-cat.mp4");
+            if (videoUrl == null) {
+                videoUrl = GameController.class.getClassLoader().getResource("dancing-cat.mp4");
+            }
+            if (videoUrl == null) {
+                videoUrl = getClass().getResource("/pictures/dancing-cat.mp4");
+            }
+
+            if (videoUrl != null) {
+                System.out.println("✅ Found video resource at: " + videoUrl.toExternalForm());
+                Media media = new Media(videoUrl.toExternalForm());
+                victoryVideoPlayer = new MediaPlayer(media);
+
+                victoryVideoPlayer.setOnError(() -> {
+                    System.err.println("❌ MediaPlayer Error: " + victoryVideoPlayer.getError().getMessage());
+                });
+
+                hangmanMediaView.setMediaPlayer(victoryVideoPlayer);
+
+                // Sound enabled (unmuted)
+                victoryVideoPlayer.setMute(false);
+                victoryVideoPlayer.setVolume(1.0);
+                victoryVideoPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+            } else {
+                System.err.println("❌ Could not find dancing-cat.mp4 in resources!");
+            }
+        } catch (Exception e) {
+            System.err.println("❌ Exception during video initialization:");
+            e.printStackTrace();
+        }
+    }
+
+    private void playVictoryVideo() {
+        if (hangmanImageView != null) hangmanImageView.setVisible(false);
+        if (hangmanMediaView != null) hangmanMediaView.setVisible(true);
+
+        if (victoryVideoPlayer != null) {
+            victoryVideoPlayer.seek(Duration.ZERO);
+            victoryVideoPlayer.setMute(false);
+            victoryVideoPlayer.setVolume(1.0);
+            victoryVideoPlayer.play();
+        }
+    }
+
+    private void resetVictoryVideo() {
+        if (victoryVideoPlayer != null) {
+            victoryVideoPlayer.stop();
+        }
+        if (hangmanMediaView != null) hangmanMediaView.setVisible(false);
+        if (hangmanImageView != null) hangmanImageView.setVisible(true);
     }
 
     // ---------------------------------------------------------------------
@@ -216,7 +296,6 @@ public class GameController {
         updateHighScoreUI();
     }
 
-    /** Writes the current highScore for this difficulty to disk. */
     private void persistHighScore() {
         Properties props = new Properties();
         try {
@@ -239,8 +318,8 @@ public class GameController {
     // GAME FLOW
     // ---------------------------------------------------------------------
 
-    /** Full reset -- used when the player picks a difficulty or explicitly restarts. */
     private void startNewGame() {
+        resetVictoryVideo();
         score = 0;
         beatHighScoreThisRun = false;
         updateScoreUI();
@@ -252,19 +331,15 @@ public class GameController {
         startTimer();
     }
 
-    /**
-     * Loads a fresh word WITHOUT touching score or the running timer.
-     * Used both by startNewGame() (first word of a run) and automatically
-     * whenever the player clears a word, so play continues seamlessly.
-     */
     private void loadNextWord() {
+        resetVictoryVideo();
+
         WordRepository wordRepository = new WordRepository(wordFile);
         HangmanQuestion question = wordRepository.getRandomQuestion();
 
         model = new HangmanModel(question.text());
         currentHint = question.hint();
 
-        // Play Again is only relevant once the game has ended -- hidden while a word is live.
         restartBtn.setVisible(false);
         restartBtn.setManaged(false);
 
@@ -280,11 +355,9 @@ public class GameController {
             mainMenuBtn.setManaged(false);
         }
 
-        // Reset the danger meter back to its normal (non-critical) look for the new word.
         dangerProgressBar.setProgress(0.0);
         dangerProgressBar.setStyle("-fx-accent: #ff7a00;");
 
-        // Clear the red low-time warning whenever a new word appears.
         setCriticalGlow(timerLabel, false);
 
         keyboardGrid.setDisable(false);
@@ -365,13 +438,7 @@ public class GameController {
         refreshUI();
     }
 
-    /**
-     * Removes seconds from the clock (used by the hint/letter-unlock).
-     * If it drains the clock to zero, ends the game as a timeout and returns
-     * false so the caller knows not to proceed with its own action.
-     */
     private boolean deductTime(int seconds) {
-
         timeRemaining -= seconds;
 
         timerLabel.setText(String.valueOf(timeRemaining));
@@ -394,7 +461,6 @@ public class GameController {
         return true;
     }
 
-    /** Unlocks one random unguessed letter in the word for a 5-second time penalty. */
     @FXML
     private void unlockLetter() {
         if (model == null || model.isWin() || model.isLose()) {
@@ -428,7 +494,6 @@ public class GameController {
         refreshUI();
     }
 
-    /** Loads /pictures/{frame}-hangman.png into the hangman image view, if present. */
     private void loadHangmanImage(int frame) {
         if (hangmanImageView == null) return;
 
@@ -445,12 +510,6 @@ public class GameController {
         }
     }
 
-    /**
-     * Normally the hangman art reflects wrong guesses. But once the clock drops
-     * to 10 seconds or below, the art switches to counting down the clock itself:
-     * 10s = no picture, 9s = frame 1, 8s = frame 2, ... 0s = frame 10 (fully hanged).
-     * Above 10 seconds, it reverts to reflecting the current wrong-guess count.
-     */
     private void updateHangmanImageForTimer() {
         if (hangmanImageView == null || model == null || model.isWin()) {
             return;
@@ -483,7 +542,6 @@ public class GameController {
         if (timeRemaining <= 10) {
             progress = (10 - timeRemaining) / 10.0;
         } else {
-            // normal danger from wrong guesses
             progress = (double) currentWrongs / maxAttempts;
         }
         dangerProgressBar.setProgress(progress);
@@ -533,13 +591,10 @@ public class GameController {
         }
     }
 
-    /**
-     * Called when the current word is fully guessed. Awards the completion
-     * bonus, briefly shows a success state, then loads the next word
-     * automatically -- the player never has to press "New Word" to continue.
-     */
     private void onWordCompleted() {
         setCriticalGlow(timerLabel, false);
+
+        playVictoryVideo();
 
         addTime(5);
         timerLabel.setText(String.valueOf(timeRemaining));
@@ -553,12 +608,14 @@ public class GameController {
 
         keyboardGrid.setDisable(true);
 
-        PauseTransition pause = new PauseTransition(Duration.seconds(1.4));
+        // Updated pause duration to 7 seconds before transitioning to next word
+        PauseTransition pause = new PauseTransition(Duration.seconds(7.0));
         pause.setOnFinished(e -> loadNextWord());
         pause.play();
     }
 
     private void triggerGameOver(boolean isTimeOut) {
+        resetVictoryVideo();
         SoundManager.playFailSound();
 
         if (hintButton != null) {
@@ -749,12 +806,14 @@ public class GameController {
     }
 
     public void exit() {
+        resetVictoryVideo();
         Stage stage = (Stage) restartBtn.getScene().getWindow();
         stage.close();
     }
 
     @FXML
     private void backToMenu() {
+        resetVictoryVideo();
 
         SoundManager.playClickSound(440, 20);
         SoundManager.stopFailSound();
@@ -767,7 +826,6 @@ public class GameController {
         }
 
         try {
-
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource(
                     "/fr/quentincillierre/hangman/application/difficulty-view.fxml")
@@ -781,7 +839,6 @@ public class GameController {
 
             stage.setScene(scene);
 
-            // Restore fullscreen
             stage.setFullScreenExitHint("");
             stage.setFullScreen(true);
 
@@ -794,6 +851,7 @@ public class GameController {
 
     @FXML
     public void restart() {
+        resetVictoryVideo();
         SoundManager.playClickSound(440, 20);
         SoundManager.stopFailSound();
         SoundManager.playNewWordSound();

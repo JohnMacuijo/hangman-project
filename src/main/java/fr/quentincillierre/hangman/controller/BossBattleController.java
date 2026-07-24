@@ -388,7 +388,7 @@ public class BossBattleController {
         statusContainer.setVisible(true);
         statusContainer.setManaged(true);
         statusContainer.setStyle("-fx-background-color: rgba(248,81,73,0.15); -fx-border-color: #f85149; -fx-border-radius: 6px; -fx-background-radius: 6px; -fx-padding: 10px 25px;");
-        statusLabel.setText("💀 The prisoner's fate is sealed. The Hangman King reigns victorious.");
+        statusLabel.setText("💀 The Hangman King reigns victorious.");
         statusLabel.setStyle("-fx-text-fill: #f85149; -fx-font-weight: bold; -fx-font-size: 16px;");
 
         narrativeLabel.setText("\"As it always ends.\" -- the Hangman King");
