@@ -754,6 +754,15 @@ public class GameController {
     @FXML
     private void backToMenu() {
 
+        SoundManager.stopFailSound();
+
+        if (countdownTimer != null) {
+            countdownTimer.stop();
+        }
+        if (criticalPulseAnimation != null) {
+            criticalPulseAnimation.stop();
+        }
+
         try {
 
             FXMLLoader loader = new FXMLLoader(

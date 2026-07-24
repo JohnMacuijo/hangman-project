@@ -1,0 +1,20 @@
+NETWORK:Connected computers sharing data
+KERNEL:The core of an operating system
+BOOLEAN:True or false data type
+POINTER:Variable storing a memory address
+BROWSER:Application for accessing websites
+PACKAGE:Collection of related classes
+INTEGER:Whole number data type
+DECODER:Converts encoded information
+PROCESS:A running program
+COMMAND:Instruction given to a computer
+COMPILE:Convert source code into machine code
+RUNTIME:Period when a program executes
+LOOPING:Repeating a block of code
+OBJECTS:Instances of a class
+METHODS:Functions inside a class
+CLASSES:Blueprints for creating objects
+LIBRARY:Collection of reusable code
+VERSION:Specific software release
+SOCKETS:Communication endpoints in networking
+SECURITY:Protection against unauthorized access
