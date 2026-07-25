@@ -67,7 +67,7 @@
                         <Label style="-fx-font-weight:bold; -fx-font-size:12px;" text="TIME:" textFill="#8b949e" />
                         <Label fx:id="timerLabel" style="-fx-font-weight:bold; -fx-font-size:12px;" text="10" textFill="#ff4a4a" />
                     </HBox>
-
+                    <Button fx:id="quitChallengeBtn" onAction="#backToMenu" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: transparent; -fx-text-fill: #c9d1d9; -fx-border-color: #30363d; -fx-border-width: 1.2px; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-font-size: 12px; -fx-font-weight: bold; -fx-cursor: hand;" text="Quit" />
                 </HBox>
 
                 <!-- King's taunt / flavor line -->
