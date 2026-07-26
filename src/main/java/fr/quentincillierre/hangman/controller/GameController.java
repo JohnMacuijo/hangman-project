@@ -124,6 +124,9 @@ public class GameController {
 
     @FXML
     public void initialize() {
+        // --- 1. SET BACKGROUND IMAGE DIRECTLY VIA CODE ---
+        applyRootBackgroundStyle();
+
         applyButtonAnimations(restartBtn, "#ff7a00", "#0b0c10", "#e06b00", "#0b0c10");
 
         restartBtn.setFocusTraversable(false);
@@ -151,6 +154,35 @@ public class GameController {
                 });
             }
         });
+    }
+
+    /**
+     * Helper method to set the downloaded background image to rootLayout
+     * with an dark overlay so contrast stays high.
+     */
+    private void applyRootBackgroundStyle() {
+        if (rootLayout == null) return;
+
+        URL bgUrl = getClass().getResource("/pictures/background.jpg");
+        if (bgUrl == null) {
+            bgUrl = getClass().getResource("/pictures/background.png");
+        }
+
+        if (bgUrl != null) {
+            rootLayout.setStyle(
+                "-fx-background-image: url('" + bgUrl.toExternalForm() + "'); " +
+                "-fx-background-size: cover; " +
+                "-fx-background-position: center center; " +
+                "-fx-background-repeat: no-repeat; " +
+                "-fx-background-color: rgba(11, 12, 16, 0.85); " + // Darkened overlay for readability
+                "-fx-background-blend-mode: multiply; " +
+                "-fx-border-color: transparent; " +
+                "-fx-effect: none;"
+            );
+        } else {
+            System.err.println("⚠️ Could not find background image at /pictures/background.jpg or .png");
+            rootLayout.setStyle("-fx-background-color: #0b0c10;");
+        }
     }
 
     // ---------------------------------------------------------------------
@@ -555,7 +587,10 @@ public class GameController {
         }
 
         hintLabel.setText(currentHint);
+        hintLabel.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 4, 0, 0, 0);");
+
         wordLengthLabel.setText(model.getWordToGuess().length() + " letters");
+        wordLengthLabel.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 4, 0, 0, 0);");
 
         updateHangmanImageForTimer();
 
@@ -608,7 +643,7 @@ public class GameController {
 
         keyboardGrid.setDisable(true);
 
-        // Updated pause duration to 7 seconds before transitioning to next word
+        // Pause duration before transitioning to next word
         PauseTransition pause = new PauseTransition(Duration.seconds(7.0));
         pause.setOnFinished(e -> loadNextWord());
         pause.play();
@@ -622,8 +657,15 @@ public class GameController {
             hintButton.setDisable(true);
         }
 
+        // Apply dark red tint overlay over the background image on Game Over
         if (rootLayout != null) {
+            URL bgUrl = getClass().getResource("/pictures/background.jpg");
+            if (bgUrl == null) bgUrl = getClass().getResource("/pictures/background.png");
+
+            String bgImgStr = bgUrl != null ? "-fx-background-image: url('" + bgUrl.toExternalForm() + "'); -fx-background-size: cover; -fx-background-position: center center; -fx-background-blend-mode: multiply; " : "";
+
             rootLayout.setStyle(
+                bgImgStr +
                 "-fx-background-color: #2b0909;" + 
                 "-fx-border-color: #f85149;" +       
                 "-fx-border-width: 3px;" +
@@ -770,8 +812,15 @@ public class GameController {
             criticalPulseAnimation.currentTimeProperty().addListener((observable, oldValue, newValue) -> {
                 if (rootLayout == null || criticalPulseAnimation == null) return;
                 double progress = newValue.toMillis() / 500.0;
+
+                URL bgUrl = getClass().getResource("/pictures/background.jpg");
+                if (bgUrl == null) bgUrl = getClass().getResource("/pictures/background.png");
+
+                String bgImgStr = bgUrl != null ? "-fx-background-image: url('" + bgUrl.toExternalForm() + "'); -fx-background-size: cover; -fx-background-position: center center; -fx-background-blend-mode: multiply; " : "";
+
                 rootLayout.setStyle(
                     String.format(
+                        bgImgStr +
                         "-fx-background-color: derive(#2b0909, %f%%);" + 
                         "-fx-border-color: #f85149;" +       
                         "-fx-border-width: 3px;" +
@@ -795,13 +844,8 @@ public class GameController {
             node.setScaleY(1.0);
             node.setStyle("-fx-text-fill: #ff4a4a; -fx-font-weight: bold; -fx-font-size: 12px;");
 
-            if (rootLayout != null) {
-                rootLayout.setStyle(
-                    "-fx-background-color: #0b0c10;" + 
-                    "-fx-border-color: transparent;" +
-                    "-fx-effect: none;"
-                );
-            }
+            // Restore the background image properly when critical timer ends
+            applyRootBackgroundStyle();
         }
     }
 
