@@ -1,0 +1,158 @@
+APPLE:A sweet fruit
+CHAIR:Used for sitting
+HOUSE:A place to live
+RIVER:A natural flowing water
+PHONE:Used for calling
+PIZZA:A popular Italian food
+FLOWER:A colorful plant
+SCHOOL:A place to learn
+WINDOW:Lets light into a room
+BANANA:A yellow fruit
+TABLE:Used for eating or working
+PENCIL:Used for writing
+BOOK:A collection of pages
+COMPUTER:An electronic device
+LAPTOP:A portable computer
+KEYBOARD:Used for typing
+MOUSE:A computer pointing device
+MONITOR:A computer screen
+PRINTER:Prints documents on paper
+BOTTLE:A container for liquids
+CUP:Used for drinking
+PLATE:Used for serving food
+SPOON:Used for eating soup
+FORK:Used for eating food
+KNIFE:Used for cutting food
+BED:A place to sleep
+PILLOW:Supports your head
+BLANKET:Keeps you warm
+DOOR:Used to enter a room
+ROOF:Covers the top of a building
+FLOOR:The bottom surface of a room
+WALL:A side of a room
+CLOCK:Shows the time
+WATCH:A wearable timepiece
+CALENDAR:Shows dates and months
+BAG:Used to carry items
+BACKPACK:A bag worn on the back
+SHOES:Worn on the feet
+SOCKS:Worn inside shoes
+SHIRT:Clothing for the upper body
+PANTS:Clothing for the legs
+HAT:Worn on the head
+JACKET:A warm outer garment
+UMBRELLA:Protects from rain
+BICYCLE:A two-wheeled vehicle
+CAR:A road vehicle
+BUS:A public transport vehicle
+TRAIN:Runs on railway tracks
+AIRPLANE:Used for flying
+BOAT:Travels on water
+ROAD:A path for vehicles
+BRIDGE:Connects two places
+PARK:A public green space
+TREE:A tall woody plant
+GRASS:A green ground plant
+LEAF:A part of a plant
+SEED:A plant starter
+FRUIT:A sweet edible plant part
+VEGETABLE:An edible plant
+ORANGE:A citrus fruit
+MANGO:A tropical fruit
+GRAPES:Small juicy fruits
+WATERMELON:A large juicy fruit
+STRAWBERRY:A small red fruit
+LEMON:A sour yellow fruit
+PEACH:A soft sweet fruit
+PEAR:A green or yellow fruit
+PINEAPPLE:A tropical fruit
+COCONUT:A hard-shelled fruit
+POTATO:A starchy vegetable
+CARROT:An orange vegetable
+ONION:A flavorful vegetable
+TOMATO:A red juicy fruit
+CABBAGE:A leafy vegetable
+BROCCOLI:A green vegetable
+CORN:A yellow grain
+RICE:A common staple food
+BREAD:A baked food
+BUTTER:A dairy spread
+CHEESE:A dairy product
+MILK:A nutritious drink
+EGG:A common breakfast food
+CHICKEN:A type of poultry
+FISH:An aquatic animal
+MEAT:Animal flesh for food
+SOUP:A liquid food
+SALAD:A mix of vegetables
+SANDWICH:Bread with filling
+NOODLES:Long thin pasta
+CAKE:A sweet dessert
+COOKIE:A baked sweet snack
+ICECREAM:A frozen dessert
+CANDY:A sweet treat
+CHOCOLATE:A cocoa-based sweet
+COFFEE:A popular hot drink
+TEA:A drink made from leaves
+JUICE:A fruit drink
+WATER:A clear liquid
+SUN:The star of our solar system
+MOON:Earth's natural satellite
+STAR:A bright object in space
+CLOUD:A mass of water vapor
+RAIN:Water falling from clouds
+SNOW:Frozen precipitation
+WIND:Moving air
+STORM:Severe weather
+MOUNTAIN:A very high landform
+HILL:A raised area of land
+OCEAN:A large body of salt water
+LAKE:A large inland body of water
+BEACH:A sandy shore
+ISLAND:Land surrounded by water
+FOREST:A large area of trees
+DESERT:A dry sandy region
+ANIMAL:A living creature
+DOG:A loyal pet
+CAT:A common household pet
+HORSE:A strong riding animal
+COW:A farm animal
+SHEEP:A wool-producing animal
+GOAT:A farm animal with horns
+PIG:A farm animal
+RABBIT:A small hopping animal
+LION:A large wild cat
+TIGER:A striped wild cat
+ELEPHANT:A large mammal with a trunk
+MONKEY:A playful tree-dwelling animal
+BEAR:A large furry animal
+WOLF:A wild canine
+FOX:A clever wild animal
+DEER:A graceful forest animal
+BIRD:A feathered flying animal
+EAGLE:A powerful bird
+PARROT:A colorful talking bird
+DUCK:A water bird
+CHICK:A baby chicken
+BEE:A honey-making insect
+BUTTERFLY:A colorful flying insect
+ANT:A small hardworking insect
+SPIDER:An eight-legged creature
+FROG:An amphibian that jumps
+SNAKE:A legless reptile
+TURTLE:A reptile with a shell
+PERSON:A human being
+BABY:A very young child
+CHILD:A young person
+TEACHER:Helps students learn
+STUDENT:A person who studies
+DOCTOR:Treats sick people
+NURSE:Cares for patients
+POLICE:Enforces the law
+FIREFIGHTER:Puts out fires
+CHEF:Cooks food professionally
+FARMER:Grows crops and raises animals
+ARTIST:Creates works of art
+MUSICIAN:Plays musical instruments
+ENGINEER:Designs and builds things
+SCIENTIST:Studies the natural world
