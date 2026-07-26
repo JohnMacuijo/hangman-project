@@ -699,43 +699,44 @@ public class GameController {
     }
 
     private void renderWordBoxes() {
-        wordDisplayBox.getChildren().clear();
-        String targetWord = model.getWordToGuess();
-        String hiddenWord = model.getHiddenWord();
+    wordDisplayBox.getChildren().clear();
+    String targetWord = model.getWordToGuess();
+    String hiddenWord = model.getHiddenWord();
 
-        for (int i = 0; i < targetWord.length(); i++) {
-            char displayChar = hiddenWord.charAt(i);
-            Label letterLabel = new Label(displayChar == '_' ? "" : String.valueOf(displayChar));
-            letterLabel.setFont(new Font("System Bold", 20));
+    for (int i = 0; i < targetWord.length(); i++) {
+        char displayChar = hiddenWord.charAt(i);
+        Label letterLabel = new Label(displayChar == '_' ? "" : String.valueOf(displayChar));
+        letterLabel.setFont(new Font("System Bold", 22));
 
-            VBox charBox = new VBox(letterLabel);
-            charBox.setAlignment(Pos.CENTER);
-            charBox.setPrefSize(45, 45);
+        VBox charBox = new VBox(letterLabel);
+        charBox.setAlignment(Pos.CENTER);
+        charBox.setPrefSize(45, 45);
 
-            if (displayChar != '_') {
-                charBox.setStyle("-fx-border-color: #ff7a00; -fx-border-width: 2px; -fx-border-radius: 8px; -fx-background-color: #21262d; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(255,122,0,0.2), 5, 0, 0, 0);");
-                letterLabel.setStyle("-fx-text-fill: #ff7a00;");
-            } else {
-                charBox.setStyle("-fx-border-color: #30363d; -fx-border-width: 1px; -fx-border-radius: 8px; -fx-background-color: #0d1117; -fx-background-radius: 8px;");
-                letterLabel.setStyle("-fx-text-fill: #ffffff;");
-            }
-
-            VBox baseContainer = new VBox(charBox);
-            baseContainer.setSpacing(4);
-            baseContainer.setAlignment(Pos.CENTER);
-
-            Label underline = new Label();
-            underline.setPrefSize(35, 2);
-            if (displayChar != '_') {
-                underline.setStyle("-fx-background-color: #ff7a00; -fx-background-radius: 1px;");
-            } else {
-                underline.setStyle("-fx-background-color: #30363d; -fx-background-radius: 1px;");
-            }
-            baseContainer.getChildren().add(underline);
-
-            wordDisplayBox.getChildren().add(baseContainer);
+        if (displayChar != '_') {
+            charBox.setStyle("-fx-border-color: #ff7a00; -fx-border-width: 2px; -fx-border-radius: 8px; -fx-background-color: #21262d; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(255,122,0,0.4), 8, 0, 0, 0);");
+            // Highlighted letter style with extra glow/shadow
+            letterLabel.setStyle("-fx-text-fill: #ff7a00; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.9), 6, 0, 0, 0);");
+        } else {
+            charBox.setStyle("-fx-border-color: #30363d; -fx-border-width: 1px; -fx-border-radius: 8px; -fx-background-color: #0d1117; -fx-background-radius: 8px;");
+            letterLabel.setStyle("-fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.9), 6, 0, 0, 0);");
         }
+
+        VBox baseContainer = new VBox(charBox);
+        baseContainer.setSpacing(4);
+        baseContainer.setAlignment(Pos.CENTER);
+
+        Label underline = new Label();
+        underline.setPrefSize(35, 2);
+        if (displayChar != '_') {
+            underline.setStyle("-fx-background-color: #ff7a00; -fx-background-radius: 1px;");
+        } else {
+            underline.setStyle("-fx-background-color: #30363d; -fx-background-radius: 1px;");
+        }
+        baseContainer.getChildren().add(underline);
+
+        wordDisplayBox.getChildren().add(baseContainer);
     }
+}
 
     private void generateKeyboard() {
         keyboardGrid.getChildren().clear();
